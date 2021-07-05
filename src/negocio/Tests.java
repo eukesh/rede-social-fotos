@@ -105,8 +105,6 @@ public class Tests {
 
     }
 
-
-
     public static void menuUsuarioInterface(){
         int loop = 0;
         while(loop == 0) {
@@ -126,6 +124,7 @@ public class Tests {
                     break;
                 default:
                     System.out.println("Opção inválida");
+                    break;
             }
         }
 
