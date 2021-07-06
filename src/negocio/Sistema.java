@@ -1,6 +1,7 @@
 package negocio;
 import dados.ControleUsuarios;
 import dados.User;
+import dados.Publicacao;
 
 import java.util.List;
 
@@ -10,8 +11,8 @@ public class Sistema {
     private ControleUsuarios controleUsuarios = new ControleUsuarios();
     private User userLogin;
 
-    public boolean cadastrarUsuarios(User usuario) {
-        if(controleUsuarios.cadastro(usuario)){
+    public boolean cadastrarUsuarios(User user) {
+        if(controleUsuarios.cadastro(user)){
             return true;
         }else{
             return false;
@@ -26,8 +27,6 @@ public class Sistema {
             return false;
         }
     }
-
-    // public void postarFoto(Foto foto){}
 
     public List<User> buscarUsuario(String nome) {
         List<User> buffer = new ArrayList<User>();
@@ -53,6 +52,18 @@ public class Sistema {
         userLogin.removeSeguindo(user);
     }
 
+    public void addPost(Publicacao post){
+        userLogin.setPublicacoes(post);
+    }
+
+    public void removePost(Publicacao post){
+        userLogin.removePublicacoes(post);
+    }
+
+    public List<Publicacao> getPostagemUser(){
+        return userLogin.getPublicacoes();
+    }
+
     public List<User> getUsuariosSeguidos(){
         return userLogin.getSeguindo();
     }
@@ -63,10 +74,6 @@ public class Sistema {
 
     public void deslogarUsuario(){
         this.userLogin = null;
-    }
-
-    public List<User> getAllUsuarios(){
-        return controleUsuarios.getUsuarios();
     }
 
 }

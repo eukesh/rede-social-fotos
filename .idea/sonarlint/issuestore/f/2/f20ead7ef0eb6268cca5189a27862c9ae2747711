@@ -1,0 +1,15 @@
+
+k
+java:S1206i"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ
+—
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(˜íƒó
+o
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").( “êæ
+t
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ª¨“Èúÿÿÿÿ
+t
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(á§Ğøÿÿÿÿ
+1
+java:S3626P"Remove this redundant jump.(ÉŠ©ƒ
+t
+java:S2293L"YReplace the type specification in this constructor call with the diamond operator ("<>").(†™·Èşÿÿÿÿ

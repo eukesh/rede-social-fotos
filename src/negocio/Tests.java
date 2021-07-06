@@ -1,6 +1,13 @@
 package negocio;
 
+import dados.Publicacao;
 import dados.User;
+
+import java.nio.file.attribute.PosixFileAttributes;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 
 import java.util.Scanner;
 
@@ -48,23 +55,58 @@ public class Tests {
     }
 
     public static int menuUsuario(){
-        System.out.println("1 - Buscar Usuario\n" +
-                "2 - Mostrar Usuarios Seguidos\n" +
-                "3 - Mostrar Seguidores\n" +
-                "0 - deslogar");
-        int op = s.nextInt();
+        System.out.printf("1 - Buscar Usuario\n2 - Mostrar Usuarios Seguidos\n3 - Mostrar Seguidores\n4 - Postar Foto\n5 - Fotos Feed\n6 - Remover Foto\n7 - mostrar suas postagens\n0 - deslogar%n");
+        int op;
+        op = s.nextInt();
         return op;
     }
 
-    public static void mostrarSeguidos(){
+    public static void postarFoto(){
+        Random random = new Random();
+        Publicacao p = new Publicacao();
+        p.setId(random.nextInt(1000));
+        s.nextLine();
+        System.out.println("Digite o texto");
+        p.setTexto(s.nextLine());
 
+        sistema.addPost(p);
+    }
+
+    public static void mostrarFotos(){
+        for(Publicacao x : sistema.getPostagemUser()) {
+            System.out.println(x);
+        }
+    }
+
+    public static void mostrarFotosSeguindo(){
+        for(User x : sistema.getUsuariosSeguidos()){
+            for(Publicacao y : x.getPublicacoes()){
+                System.out.println(y);
+                System.out.println();
+            }
+        }
+    }
+
+    public static void removerPost(){
+        List<Publicacao> temp = sistema.getPostagemUser();
+
+        for (int i = 0; i <temp.size(); i++) {
+            System.out.println(i);
+            System.out.println(temp.get(i));
+            System.out.println();
+        }
+        s.nextLine();
+        int op = Integer.parseInt(s.nextLine());
+
+        sistema.removePost(temp.get(op));
+    }
+
+    public static void mostrarUsuariosSeguindo(){
         System.out.println(sistema.getUsuariosSeguidos());
-
     }
 
     public static void mostrarSeguidores(){
         System.out.println(sistema.getSeguidores());
-
     }
 
     public static void buscarUsuario(){
@@ -106,21 +148,33 @@ public class Tests {
     }
 
     public static void menuUsuarioInterface(){
-        int loop = 0;
-        while(loop == 0) {
+        first:
+        while(true) {
             switch (menuUsuario()) {
                 case 0:
                     sistema.deslogarUsuario();
-                    loop++;
-                    break;
+                    break first;
                 case 1:
                     buscarUsuario();
                     break;
                 case 2:
-                    mostrarSeguidos();
+                    mostrarUsuariosSeguindo();
                     break;
                 case 3:
                     mostrarSeguidores();
+
+                    break;
+                case 4:
+                    postarFoto();
+                    break;
+                case 5:
+                    mostrarFotosSeguindo();
+                    break;
+                case 6:
+                    removerPost();
+                    break;
+                case 7:
+                    mostrarFotos();
                     break;
                 default:
                     System.out.println("Opção inválida");
@@ -132,16 +186,14 @@ public class Tests {
     }
 
     public static int menuInicial(){
-        System.out.println("1 - Login\n" +
-                "2 - Cadastro\n" +
-                "0 - Sair");
-        int op = s.nextInt();
+        System.out.printf("1 - Login\n2 - Cadastro\n0 - Sair%n");
+        int op;
+        op = s.nextInt();
         return op;
     }
 
     public static void menuInicialInterface(){
-        int loop = 0;
-        while(loop == 0) {
+        while(true) {
             switch (menuInicial()) {
                 case 0:
                     System.exit(0);
@@ -154,6 +206,7 @@ public class Tests {
                     break;
                 default:
                     System.out.println("Opção inválida");
+                    break;
             }
         }
     }

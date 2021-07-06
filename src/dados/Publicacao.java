@@ -4,7 +4,7 @@ public class Publicacao {
     private int id;
     // private Foto imagem;
     private String texto;
-    private Like likes;
+    private Like likes = new Like();
 
     public Publicacao(){
 
@@ -33,6 +33,22 @@ public class Publicacao {
     public String getTexto() {
         return texto;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o instanceof Publicacao) {
+            Publicacao c = (Publicacao) o;
+            if(this.id == c.getId()){
+                return true;
+            }else{
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
 
     @Override
     public String toString() {

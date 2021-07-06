@@ -31,7 +31,7 @@ public class User {
     public String getName() {
         return name;
     }
-    // 0 = masc | 1 = FEM | 3 = Indefinido
+
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
@@ -95,6 +95,19 @@ public class User {
 
     public void setPublicacoes(Publicacao publicacoes) {
         this.publicacoes.add(publicacoes);
+    }
+
+    public void removePublicacoes(Publicacao publicacao){
+        List<Publicacao> newList = new ArrayList<Publicacao>();
+
+        for (Publicacao x : this.publicacoes){
+            if(x.equals(publicacao)){
+                continue;
+            }else{
+                newList.add(x);
+            }
+        }
+        this.publicacoes = newList;
     }
 
     public List<Publicacao> getPublicacoes() {
