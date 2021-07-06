@@ -1,7 +1,8 @@
 package dados;
 
 public class Publicacao {
-    private int id;
+    private String id;
+    private String user;
     // private Foto imagem;
     private String texto;
     private Like likes = new Like();
@@ -13,12 +14,15 @@ public class Publicacao {
     public void setLikes() {
         likes.setQuantLike();
     }
+    public void setLikes(String like) {
+        likes.setQuantLike(Integer.parseInt(like));
+    }
 
     public int getLikes() {
         return likes.getQuantLike();
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -26,12 +30,20 @@ public class Publicacao {
         this.texto = texto;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     public String getTexto() {
         return texto;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getUser() {
+        return user;
     }
 
     @Override

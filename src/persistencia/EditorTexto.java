@@ -13,7 +13,7 @@ public class EditorTexto {
         try {
             arq = new FileWriter(caminho);
             for (int i = 0; i < dados.size(); i++) {
-                arq.write(dados.get(i) + "\n");
+                arq.write(dados.get(i));
             }
 
             arq.close();

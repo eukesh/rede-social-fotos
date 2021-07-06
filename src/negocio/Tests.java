@@ -3,8 +3,6 @@ package negocio;
 import dados.Publicacao;
 import dados.User;
 
-import java.nio.file.attribute.PosixFileAttributes;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -44,18 +42,20 @@ public class Tests {
         user1.setEmail(s.nextLine());
         System.out.print("Qual seu Sexo?: ");
         user1.setSexo(s.nextLine());
+        System.out.print("Qual seu Telefone?: ");
+        user1.setTelefone(s.nextLine());
         System.out.print("Senha: ");
         user1.setSenha(s.nextLine());
 
         if(sistema.cadastrarUsuarios(user1)){
-            System.out.println("User1 Cadastrado com sucesso");
+            System.out.println("User Cadastrado com sucesso");
         }else{
             System.out.println("Usuario já cadastado");
         }
     }
 
     public static int menuUsuario(){
-        System.out.printf("1 - Buscar Usuario\n2 - Mostrar Usuarios Seguidos\n3 - Mostrar Seguidores\n4 - Postar Foto\n5 - Fotos Feed\n6 - Remover Foto\n7 - mostrar suas postagens\n0 - deslogar%n");
+        System.out.printf("\n1 - Buscar Usuario\n2 - Mostrar Usuarios Seguidos\n3 - Mostrar Seguidores\n4 - Postar Foto\n5 - Fotos Feed\n6 - Remover Foto\n7 - Mostrar suas postagens\n0 - deslogar%n");
         int op;
         op = s.nextInt();
         return op;
@@ -64,7 +64,7 @@ public class Tests {
     public static void postarFoto(){
         Random random = new Random();
         Publicacao p = new Publicacao();
-        p.setId(random.nextInt(1000));
+        p.setId(String.valueOf(random.nextInt(1000)));
         s.nextLine();
         System.out.println("Digite o texto");
         p.setTexto(s.nextLine());
@@ -78,13 +78,12 @@ public class Tests {
         }
     }
 
-    public static void mostrarFotosSeguindo(){
-        for(User x : sistema.getUsuariosSeguidos()){
-            for(Publicacao y : x.getPublicacoes()){
-                System.out.println(y);
-                System.out.println();
-            }
+    public static void mostrarFeed(){
+        for(Publicacao x : sistema.getPostagemFeed()){
+            System.out.println(x);
+            sistema.likePublicacao(x);
         }
+
     }
 
     public static void removerPost(){
@@ -168,7 +167,7 @@ public class Tests {
                     postarFoto();
                     break;
                 case 5:
-                    mostrarFotosSeguindo();
+                    mostrarFeed();
                     break;
                 case 6:
                     removerPost();
@@ -186,7 +185,7 @@ public class Tests {
     }
 
     public static int menuInicial(){
-        System.out.printf("1 - Login\n2 - Cadastro\n0 - Sair%n");
+        System.out.printf("\n1 - Login\n2 - Cadastro\n0 - Sair%n");
         int op;
         op = s.nextInt();
         return op;

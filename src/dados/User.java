@@ -8,8 +8,8 @@ public class User {
     private String name;
     private String sexo;
     private String email;
-    private long telefone;
-    private List<Publicacao> publicacoes = new ArrayList<Publicacao>();
+    private String telefone;
+    private List<String> publicacoes = new ArrayList<String>();
     private List<User> seguindo = new ArrayList<User>();
     private List<User> seguidores = new ArrayList<User>();
     private String senha;
@@ -48,11 +48,11 @@ public class User {
         return email;
     }
 
-    public void setTelefone(long telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
-    public long getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
@@ -93,15 +93,15 @@ public class User {
         return seguindo;
     }
 
-    public void setPublicacoes(Publicacao publicacoes) {
-        this.publicacoes.add(publicacoes);
+    public void setPublicacoes(String post) {
+        this.publicacoes.add(post);
     }
 
     public void removePublicacoes(Publicacao publicacao){
-        List<Publicacao> newList = new ArrayList<Publicacao>();
+        List<String> newList = new ArrayList<String>();
 
-        for (Publicacao x : this.publicacoes){
-            if(x.equals(publicacao)){
+        for (String x : this.publicacoes){
+            if(x.equals(publicacao.getId().toString())){
                 continue;
             }else{
                 newList.add(x);
@@ -110,7 +110,7 @@ public class User {
         this.publicacoes = newList;
     }
 
-    public List<Publicacao> getPublicacoes() {
+    public List<String> getPublicacoes() {
         return publicacoes;
     }
 

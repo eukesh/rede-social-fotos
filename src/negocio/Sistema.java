@@ -2,6 +2,7 @@ package negocio;
 import dados.ControleUsuarios;
 import dados.User;
 import dados.Publicacao;
+import persistencia.PostDAO;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class Sistema {
     private ControleUsuarios controleUsuarios = new ControleUsuarios();
     private User userLogin;
+    private PostDAO postDao = new PostDAO();
 
     public boolean cadastrarUsuarios(User user) {
         if(controleUsuarios.cadastro(user)){
@@ -53,15 +55,40 @@ public class Sistema {
     }
 
     public void addPost(Publicacao post){
-        userLogin.setPublicacoes(post);
+        userLogin.setPublicacoes(post.getId());
+        post.setUser(userLogin.getNickName());
+        postDao.insert(post);
     }
 
     public void removePost(Publicacao post){
-        userLogin.removePublicacoes(post);
+        postDao.delete(post);
     }
 
     public List<Publicacao> getPostagemUser(){
-        return userLogin.getPublicacoes();
+        List<Publicacao> temp = new ArrayList<Publicacao>();
+        for (Publicacao x : postDao.getAll()){
+            if(x.getUser().equals(userLogin.getNickName())){
+                temp.add(x);
+            }
+        }
+        return temp;
+    }
+
+    public List<Publicacao> getPostagemFeed(){
+        List<Publicacao> temp = new ArrayList<Publicacao>();
+        for (Publicacao x : postDao.getAll()){
+            for(User y : userLogin.getSeguindo()){
+                if(x.getUser().equals(y.getNickName())){
+                    temp.add(x);
+                }
+            }
+        }
+        return temp;
+    }
+
+    public void likePublicacao(Publicacao post){
+        post.setLikes();
+        postDao.att(post);
     }
 
     public List<User> getUsuariosSeguidos(){

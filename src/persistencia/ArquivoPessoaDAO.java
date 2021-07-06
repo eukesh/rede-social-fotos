@@ -15,7 +15,9 @@ public class ArquivoPessoaDAO {
         p += pessoa.getName() + ",";
         p += pessoa.getEmail() + ",";
         p += pessoa.getNickName() + ",";
-        p += pessoa.getSenha() + ",\n";
+        p += pessoa.getSenha() + ",";
+        p += pessoa.getSexo() + ",";
+        p += pessoa.getTelefone() + ",\n";
 
         return p;
     }
@@ -27,6 +29,8 @@ public class ArquivoPessoaDAO {
         pessoa.setEmail(atributos[1]);
         pessoa.setNickName(atributos[2]);
         pessoa.setSenha(atributos[3]);
+        pessoa.setSexo(atributos[4]);
+        pessoa.setTelefone(atributos[5]);
 
         return pessoa;
     }
