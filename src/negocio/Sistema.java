@@ -77,8 +77,8 @@ public class Sistema {
     public List<Publicacao> getPostagemFeed(){
         List<Publicacao> temp = new ArrayList<Publicacao>();
         for (Publicacao x : postDao.getAll()){
-            for(User y : userLogin.getSeguindo()){
-                if(x.getUser().equals(y.getNickName())){
+            for(String y : userLogin.getSeguindo()){
+                if(x.getUser().equals(y)){
                     temp.add(x);
                 }
             }
@@ -92,11 +92,27 @@ public class Sistema {
     }
 
     public List<User> getUsuariosSeguidos(){
-        return userLogin.getSeguindo();
+        List<User> temp = new ArrayList<User>();
+        for(User x : controleUsuarios.getUsuarios()){
+            for(String y : userLogin.getSeguindo()){
+                if(x.getNickName().equals(y)){
+                    temp.add(x);
+                }
+            }
+        }
+        return temp;
     }
 
     public List<User> getSeguidores(){
-        return userLogin.getSeguidores();
+        List<User> temp = new ArrayList<User>();
+        for(User x : controleUsuarios.getUsuarios()){
+            for(String y : userLogin.getSeguidores()){
+                if(x.getNickName().equals(y)){
+                    temp.add(x);
+                }
+            }
+        }
+        return temp;
     }
 
     public void deslogarUsuario(){

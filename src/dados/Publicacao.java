@@ -14,6 +14,7 @@ public class Publicacao {
     public void setLikes() {
         likes.setQuantLike();
     }
+
     public void setLikes(String like) {
         likes.setQuantLike(Integer.parseInt(like));
     }

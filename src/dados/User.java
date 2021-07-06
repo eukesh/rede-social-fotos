@@ -10,8 +10,8 @@ public class User {
     private String email;
     private String telefone;
     private List<String> publicacoes = new ArrayList<String>();
-    private List<User> seguindo = new ArrayList<User>();
-    private List<User> seguidores = new ArrayList<User>();
+    private List<String> seguindo = new ArrayList<String>();
+    private List<String> seguidores = new ArrayList<String>();
     private String senha;
 
     public User(){}
@@ -65,18 +65,18 @@ public class User {
     }
 
     public void setSeguidores(User usuario) {
-        this.seguidores.add(usuario);
+        this.seguidores.add(usuario.getNickName());
     }
 
     public void setSeguindo(User usuario) {
-        this.seguindo.add(usuario);
+        this.seguindo.add(usuario.getNickName());
     }
 
     public void removeSeguindo(User usuario){
-        List<User> newList = new ArrayList<User>();
+        List<String> newList = new ArrayList<String>();
 
-        for (User x : this.seguindo){
-            if(x.equals(usuario)){
+        for (String x : this.seguindo){
+            if(x.equals(usuario.getNickName())){
                 continue;
             }else{
                 newList.add(x);
@@ -85,11 +85,11 @@ public class User {
         this.seguindo = newList;
     }
 
-    public List<User> getSeguidores() {
+    public List<String> getSeguidores() {
         return seguidores;
     }
 
-    public List<User> getSeguindo() {
+    public List<String> getSeguindo() {
         return seguindo;
     }
 

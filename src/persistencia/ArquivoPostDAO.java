@@ -10,7 +10,7 @@ import dados.User;
 
 
 public class ArquivoPostDAO {
-    private final String caminho = "C:\\Users\\User\\Documents\\Code\\POO\\rede-social-fotos\\persistencia\\postagens.csv";
+    private final String caminho = "C:\\Users\\User\\Documents\\Code\\POO\\rede-social-fotos\\database\\postagens.csv";
     private static EditorTexto arquivo = new EditorTexto();
 
     private String toCSV(Publicacao post) {

@@ -6,6 +6,7 @@ public class Like {
     public void setQuantLike() {
         this.quantLike++;
     }
+
     public void setQuantLike(int k) {
         this.quantLike = k;
     }
