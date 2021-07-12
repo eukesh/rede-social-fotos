@@ -47,6 +47,7 @@ public class Sistema {
         for (User x : buscarUsuario(nick)) {
             userLogin.setSeguindo(x);
             x.setSeguidores(userLogin);
+            userLogin.setSeguidores(x); // temporario somente para apresentação
         }
     }
 
