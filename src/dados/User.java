@@ -4,17 +4,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    private int id;
     private String nickName;
     private String name;
     private String sexo;
     private String email;
-    private String telefone;
-    private List<String> publicacoes = new ArrayList<String>();
-    private List<String> seguindo = new ArrayList<String>();
-    private List<String> seguidores = new ArrayList<String>();
+    private int telefone;
+    private List<User> seguindo = new ArrayList<User>();
+    private List<User> seguidores = new ArrayList<User>();
     private String senha;
 
     public User(){}
+
+    public User(int id,String name,String sexo, String email, int telefone,String senha,String nick,List<User>seguindo,List<User>seguidores){
+        this.id = id;
+        this.name = name;
+        this.sexo = sexo;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.nickName = nick;
+        this.seguindo = seguindo;
+        this.seguidores = seguidores;
+    }
+
+    public User(int id, String nome, String sexo, String email, int telefone, String senha, String nick) {
+        this.id = id;
+        this.name = name;
+        this.sexo = sexo;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.nickName = nick;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
@@ -48,11 +78,11 @@ public class User {
         return email;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(int telefone) {
         this.telefone = telefone;
     }
 
-    public String getTelefone() {
+    public int getTelefone() {
         return telefone;
     }
 
@@ -65,60 +95,26 @@ public class User {
     }
 
     public void setSeguidores(User usuario) {
-        this.seguidores.add(usuario.getNickName());
+        this.seguidores.add(usuario);
     }
 
     public void setSeguindo(User usuario) {
-        this.seguindo.add(usuario.getNickName());
+        this.seguindo.add(usuario);
     }
 
-    public void removeSeguindo(User usuario){
-        List<String> newList = new ArrayList<String>();
-
-        for (String x : this.seguindo){
-            if(x.equals(usuario.getNickName())){
-                continue;
-            }else{
-                newList.add(x);
-            }
-        }
-        this.seguindo = newList;
-    }
-
-    public List<String> getSeguidores() {
+    public List<User> getSeguidores() {
         return seguidores;
     }
 
-    public List<String> getSeguindo() {
+    public List<User> getSeguindo() {
         return seguindo;
-    }
-
-    public void setPublicacoes(String post) {
-        this.publicacoes.add(post);
-    }
-
-    public void removePublicacoes(Publicacao publicacao){
-        List<String> newList = new ArrayList<String>();
-
-        for (String x : this.publicacoes){
-            if(x.equals(publicacao.getId().toString())){
-                continue;
-            }else{
-                newList.add(x);
-            }
-        }
-        this.publicacoes = newList;
-    }
-
-    public List<String> getPublicacoes() {
-        return publicacoes;
     }
 
     @Override
     public boolean equals(Object o) {
 
         if (o instanceof User) {
-            User c = (User) o;
+            final User c = (User) o;
             return this.nickName.equals(c.getNickName());
         } else {
             return false;

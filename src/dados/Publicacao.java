@@ -1,37 +1,55 @@
 package dados;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Publicacao {
-    private String id;
-    private String user;
-    // private Foto imagem;
+    private int id;
+    private User user;
+    private byte[] imagem;
     private String texto;
-    private Like likes = new Like();
+    private List<User> likes = new ArrayList<User>();
 
-    public Publicacao(){
+    public Publicacao(){}
 
+    public Publicacao(int id,String texto,User user){
+        this.id = id;
+        this.texto = texto;
+        this.user = user;
     }
 
-    public void setLikes() {
-        likes.setQuantLike();
+    public Publicacao(int id,String texto,User user,List<User>likes){
+        this.id = id;
+        this.texto = texto;
+        this.user = user;
+        this.likes = likes;
     }
 
-    public void setLikes(String like) {
-        likes.setQuantLike(Integer.parseInt(like));
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public boolean setLikes(User user) {
+        if(!likes.contains(user)) {
+            likes.add(user);
+            return true;
+        }
+        return false;
     }
 
     public int getLikes() {
-        return likes.getQuantLike();
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        return likes.size();
     }
 
     public void setTexto(String texto) {
         this.texto = texto;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -39,11 +57,11 @@ public class Publicacao {
         return texto;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -62,13 +80,13 @@ public class Publicacao {
         }
     }
 
-
     @Override
     public String toString() {
         return "Publicacao{" +
                 "id=" + id +
                 ", texto='" + texto + '\'' +
-                ", likes=" + likes +
+                ",curtidas="+getLikes() +
+                ",QuemCurtiu="+likes+
                 '}';
     }
 }

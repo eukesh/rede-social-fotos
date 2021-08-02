@@ -1,43 +1,52 @@
 package dados;
 
+import java.sql.SQLException;
 import java.util.List;
-import persistencia.PessoaDAO;
+
+import exceptions.InsertException;
+import exceptions.SelectException;
+import persistencia.UserDAO;
 
 public class ControleUsuarios {
-    private PessoaDAO pessoaDAO = new PessoaDAO();
+    private final UserDAO userDAO;
 
-    public boolean cadastro (User user){
-        for(User x : pessoaDAO.getAll()){
+    public ControleUsuarios() throws SQLException, SelectException, ClassNotFoundException {
+        userDAO = UserDAO.getInstace();
+    }
+
+    public boolean cadastro (User user) throws SelectException, InsertException {
+        for(User x : userDAO.getAll()){
             if(x.equals(user)){
                 return false;
             }else{
-                pessoaDAO.insert(user);
+                userDAO.insert(user);
+                userDAO.getAll();
                 return true;
             }
         }
-        pessoaDAO.insert(user);
+        userDAO.insert(user);
         return true;
     }
 
-    public boolean autenticaLogin(User user){
-        for(User x : pessoaDAO.getAll()){
+    public User autenticaLogin(User user) throws SelectException {
+        for(User x : userDAO.getAll()){
             if(x.getNickName().equals(user.getNickName())){
                 if(x.getSenha().equals(user.getSenha())){
-                    return true;
+                    return x;
                 }
             }else if(x.getEmail().equals(user.getEmail())){
                 if(x.getSenha().equals(user.getSenha())){
-                    return true;
+                    return x;
                 }
             }
         }
 
-        return false;
+        return null;
     }
 
 
-    public List<User> getUsuarios(){
-        return pessoaDAO.getAll();
+    public List<User> getUsuarios() throws SelectException {
+        return userDAO.getAll();
     }
 
 

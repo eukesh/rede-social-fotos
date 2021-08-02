@@ -2,19 +2,30 @@ package negocio;
 
 import dados.Publicacao;
 import dados.User;
+import exceptions.DeleteException;
+import exceptions.InsertException;
+import exceptions.SelectException;
 
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Random;
-
-
 import java.util.Scanner;
 
 public class Tests {
-    private static Sistema sistema = new Sistema();
-    private static Scanner s = new Scanner(System.in);
+
+    private static final Scanner s = new Scanner(System.in);
 
 
-    public static void login(){
+    static Sistema sistema;
+
+    static {
+        try {
+            sistema = new Sistema("toor");
+        } catch (ClassNotFoundException | SQLException | SelectException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void login() throws SelectException, InsertException, DeleteException {
         User user = new User();
         s.nextLine();
         System.out.print("Usuário/Email: ");
@@ -31,7 +42,7 @@ public class Tests {
         }
     }
 
-    public static void cadastrar(){
+    public static void cadastrar() throws InsertException, SelectException {
         User user1 = new User();
         s.nextLine();
         System.out.print("Nome: ");
@@ -43,7 +54,7 @@ public class Tests {
         System.out.print("Qual seu Sexo?: ");
         user1.setSexo(s.nextLine());
         System.out.print("Qual seu Telefone?: ");
-        user1.setTelefone(s.nextLine());
+        user1.setTelefone(Integer.parseInt(s.nextLine()));
         System.out.print("Senha: ");
         user1.setSenha(s.nextLine());
 
@@ -61,10 +72,8 @@ public class Tests {
         return op;
     }
 
-    public static void postarFoto(){
-        Random random = new Random();
+    public static void postarFoto() throws InsertException, SelectException {
         Publicacao p = new Publicacao();
-        p.setId(String.valueOf(random.nextInt(1000)));
         s.nextLine();
         System.out.println("Digite o texto");
         p.setTexto(s.nextLine());
@@ -72,21 +81,21 @@ public class Tests {
         sistema.addPost(p);
     }
 
-    public static void mostrarFotos(){
+    public static void mostrarFotos() throws SelectException {
         for(Publicacao x : sistema.getPostagemUser()) {
             System.out.println(x);
         }
     }
 
-    public static void mostrarFeed(){
+    public static void mostrarFeed() throws SelectException, InsertException {
         for(Publicacao x : sistema.getPostagemFeed()){
             System.out.println(x);
-            sistema.likePublicacao(x);
+
         }
 
     }
 
-    public static void removerPost(){
+    public static void removerPost() throws SelectException, DeleteException {
         List<Publicacao> temp = sistema.getPostagemUser();
 
         for (int i = 0; i <temp.size(); i++) {
@@ -108,7 +117,7 @@ public class Tests {
         System.out.println(sistema.getSeguidores());
     }
 
-    public static void buscarUsuario(){
+    public static void buscarUsuario() throws SelectException, InsertException, DeleteException {
         s.nextLine();
         System.out.println("Qual o nick?");
         String nick = s.nextLine();
@@ -146,7 +155,7 @@ public class Tests {
 
     }
 
-    public static void menuUsuarioInterface(){
+    public static void menuUsuarioInterface() throws SelectException, InsertException, DeleteException {
         first:
         while(true) {
             switch (menuUsuario()) {
@@ -191,7 +200,7 @@ public class Tests {
         return op;
     }
 
-    public static void menuInicialInterface(){
+    public static void menuInicialInterface() throws InsertException, SelectException, DeleteException {
         while(true) {
             switch (menuInicial()) {
                 case 0:
@@ -209,7 +218,7 @@ public class Tests {
             }
         }
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InsertException, SelectException, DeleteException {
         menuInicialInterface();
     }
 }
