@@ -1,11 +1,11 @@
-package persistencia;
+package database;
 
-import dados.Publicacao;
-import dados.User;
 import exceptions.DeleteException;
 import exceptions.InsertException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
+import model.Publicacao;
+import model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,7 +40,7 @@ public class PostDAO {
     private PostDAO() throws ClassNotFoundException, SQLException {
         Connection conexao = Conexao.getConexao();
         selectNewId = conexao.prepareStatement("select nextval('id_publicacao')");
-        insert = conexao.prepareStatement("insert into publicacao values(?,?,?)");
+        insert = conexao.prepareStatement("insert into publicacao values(?,?,?,?)");
         select = conexao.prepareStatement("select * from publicacao where id = ?");
         selectUser = conexao.prepareStatement("select * from publicacao where id_user =?");
         update = conexao.prepareStatement("update publicacao set texto = ? where id = ?");
@@ -60,15 +60,15 @@ public class PostDAO {
         return 0;
     }
 
-    public void insert(Publicacao post) throws InsertException, SelectException{
+    public void insert(Publicacao post) throws InsertException {
         try{
             insert.setInt(1,selectNewId());
             insert.setString(2,post.getTexto());
             insert.setInt(3,post.getUser().getId());
-            System.out.println(insert);
+            insert.setBytes(4,post.getImagem());
             insert.executeUpdate();
 
-        }catch (SQLException e){
+        }catch (SQLException | SelectException e){
             throw new InsertException("Erro ao inserir Post");
         }
     }
@@ -81,8 +81,9 @@ public class PostDAO {
             while(rs.next()){
                 int id = rs.getInt(1);
                 String texto = rs.getString(2);
+                byte[] img = rs.getBytes(4);
 
-                temp.add (new Publicacao(id,texto,user));
+                temp.add(new Publicacao(id,texto,user,curtidasDAO.selectPost(id),img));
             }
             return temp;
         }catch (SQLException e) {
@@ -120,8 +121,9 @@ public class PostDAO {
                 int id = rs.getInt(1);
                 String texto = rs.getString(2);
                 int idUser = rs.getInt(3);
+                byte[] img = rs.getBytes(4);
 
-                temp.add(new Publicacao(id,texto,userDAO.select(idUser),curtidasDAO.selectPost(id)));
+                temp.add(new Publicacao(id,texto,userDAO.select(idUser),curtidasDAO.selectPost(id),img));
             }
 
             return temp;

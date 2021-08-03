@@ -1,10 +1,11 @@
-package negocio;
+package controller;
 
-import dados.Publicacao;
-import dados.User;
 import exceptions.DeleteException;
 import exceptions.InsertException;
 import exceptions.SelectException;
+import model.ImageMethods;
+import model.Publicacao;
+import model.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -25,7 +26,7 @@ public class Tests {
         }
     }
 
-    public static void login() throws SelectException, InsertException, DeleteException {
+    public static void login() throws Exception {
         User user = new User();
         s.nextLine();
         System.out.print("Usuário/Email: ");
@@ -72,18 +73,19 @@ public class Tests {
         return op;
     }
 
-    public static void postarFoto() throws InsertException, SelectException {
+    public static void postarFoto() throws Exception {
         Publicacao p = new Publicacao();
         s.nextLine();
         System.out.println("Digite o texto");
         p.setTexto(s.nextLine());
-
+        p.setImagem(ImageMethods.imageToByte("C:\\Users\\User\\Documents\\Code\\POO\\rede-social-fotos\\.temp\\UML.png"));
         sistema.addPost(p);
     }
 
-    public static void mostrarFotos() throws SelectException {
+    public static void mostrarFotos() throws Exception {      
         for(Publicacao x : sistema.getPostagemUser()) {
             System.out.println(x);
+            ImageMethods.saveByteToImage(x.getImagem());
         }
     }
 
@@ -155,7 +157,7 @@ public class Tests {
 
     }
 
-    public static void menuUsuarioInterface() throws SelectException, InsertException, DeleteException {
+    public static void menuUsuarioInterface() throws Exception {
         first:
         while(true) {
             switch (menuUsuario()) {
@@ -200,7 +202,7 @@ public class Tests {
         return op;
     }
 
-    public static void menuInicialInterface() throws InsertException, SelectException, DeleteException {
+    public static void menuInicialInterface() throws Exception {
         while(true) {
             switch (menuInicial()) {
                 case 0:
@@ -218,7 +220,7 @@ public class Tests {
             }
         }
     }
-    public static void main(String[] args) throws InsertException, SelectException, DeleteException {
+    public static void main(String[] args) throws Exception {
         menuInicialInterface();
     }
 }

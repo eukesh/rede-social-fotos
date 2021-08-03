@@ -1,4 +1,4 @@
-package dados;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ public class Publicacao {
     private User user;
     private byte[] imagem;
     private String texto;
-    private List<User> likes = new ArrayList<User>();
+    private List<User> curtidas = new ArrayList<User>();
 
     public Publicacao(){}
 
@@ -18,11 +18,12 @@ public class Publicacao {
         this.user = user;
     }
 
-    public Publicacao(int id,String texto,User user,List<User>likes){
+    public Publicacao(int id,String texto,User user,List<User> curtidas, byte[] img){
         this.id = id;
         this.texto = texto;
         this.user = user;
-        this.likes = likes;
+        this.curtidas = curtidas;
+        this.imagem = img;
     }
 
     public void setImagem(byte[] imagem) {
@@ -34,15 +35,15 @@ public class Publicacao {
     }
 
     public boolean setLikes(User user) {
-        if(!likes.contains(user)) {
-            likes.add(user);
+        if(!curtidas.contains(user)) {
+            curtidas.add(user);
             return true;
         }
         return false;
     }
 
-    public int getLikes() {
-        return likes.size();
+    public int getCurtidas() {
+        return curtidas.size();
     }
 
     public void setTexto(String texto) {
@@ -85,8 +86,8 @@ public class Publicacao {
         return "Publicacao{" +
                 "id=" + id +
                 ", texto='" + texto + '\'' +
-                ",curtidas="+getLikes() +
-                ",QuemCurtiu="+likes+
+                ",curtidas="+ getCurtidas() +
+                ",QuemCurtiu="+ curtidas +
                 '}';
     }
 }

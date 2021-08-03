@@ -1,7 +1,7 @@
-package persistencia;
+package database;
 
-import dados.Publicacao;
-import dados.User;
+import model.Publicacao;
+import model.User;
 import exceptions.DeleteException;
 import exceptions.InsertException;
 import exceptions.SelectException;
@@ -51,14 +51,14 @@ public class CurtidasDAO {
         return 0;
     }
 
-    public void insert(Publicacao post, User user2) throws InsertException, SelectException{
+    public void insert(Publicacao post, User user) throws InsertException{
         try{
             insert.setInt(1,selectNewId());
             insert.setInt(2,post.getId());
-            insert.setInt(3,user2.getId());
+            insert.setInt(3,user.getId());
             insert.executeUpdate();
 
-        }catch (SQLException e){
+        }catch (SQLException | SelectException e){
             throw new InsertException("Erro ao inserir Post");
         }
     }

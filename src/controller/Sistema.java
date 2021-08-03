@@ -1,14 +1,14 @@
-package negocio;
-import dados.ControleUsuarios;
-import dados.User;
-import dados.Publicacao;
+package controller;
+import model.ControleUsuarios;
+import model.User;
+import model.Publicacao;
 import exceptions.DeleteException;
 import exceptions.InsertException;
 import exceptions.SelectException;
-import persistencia.Conexao;
-import persistencia.CurtidasDAO;
-import persistencia.PostDAO;
-import persistencia.SeguidorDAO;
+import database.Conexao;
+import database.CurtidasDAO;
+import database.PostDAO;
+import database.SeguidorDAO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -24,7 +24,7 @@ public class Sistema {
 
     public Sistema(String senha) throws ClassNotFoundException, SQLException, SelectException {
         Conexao.setSenha(senha);
-        controleUsuarios = new ControleUsuarios();
+        controleUsuarios = ControleUsuarios.getInstance();
         postDao = PostDAO.getInstace();
         seguidorDAO = SeguidorDAO.getInstace();
         curtidasDAO = CurtidasDAO.getInstace();
@@ -66,9 +66,11 @@ public class Sistema {
     }
 
     public void addPost(Publicacao post) throws InsertException, SelectException {
+
         post.setUser(userLogin);
         postDao.insert(post);
     }
+
 
     public void removePost(Publicacao post) throws DeleteException, SelectException {
         postDao.delete(post);
@@ -76,13 +78,7 @@ public class Sistema {
     }
 
     public List<Publicacao> getPostagemUser() throws SelectException {
-        List<Publicacao> temp = new ArrayList<>();
-        for (Publicacao x : postDao.getAll()){
-            if(x.getUser().equals(userLogin)){
-                temp.add(x);
-            }
-        }
-        return temp;
+        return postDao.select(userLogin);
     }
 
     public List<Publicacao> getPostagemFeed() throws SelectException, InsertException {

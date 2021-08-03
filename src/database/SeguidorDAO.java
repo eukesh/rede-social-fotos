@@ -1,6 +1,6 @@
-package persistencia;
+package database;
 
-import dados.User;
+import model.User;
 import exceptions.DeleteException;
 import exceptions.InsertException;
 import exceptions.SelectException;
@@ -52,14 +52,14 @@ public class SeguidorDAO {
         return 0;
     }
 
-    public void insert(User user1,User user2) throws InsertException, SelectException{
+    public void insert(User user1,User user2) throws InsertException{
         try{
             insert.setInt(1,selectNewId());
             insert.setInt(2,user1.getId());
             insert.setInt(3,user2.getId());
             insert.executeUpdate();
 
-        }catch (SQLException e){
+        }catch (SQLException | SelectException e){
             throw new InsertException("Erro ao inserir Post");
         }
     }

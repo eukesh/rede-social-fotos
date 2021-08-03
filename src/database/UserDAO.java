@@ -1,6 +1,6 @@
-package persistencia;
+package database;
 
-import dados.User;
+import model.User;
 import exceptions.DeleteException;
 import exceptions.InsertException;
 import exceptions.SelectException;
@@ -56,7 +56,7 @@ public class UserDAO {
         return 0;
     }
 
-    public void insert(User usuario) throws InsertException, SelectException{
+    public void insert(User usuario) throws InsertException{
         try{
             insert.setInt(1,selectNewId());
             insert.setString(2,usuario.getName());
@@ -67,7 +67,7 @@ public class UserDAO {
             insert.setString(7,usuario.getNickName());
             insert.executeUpdate();
 
-        }catch (SQLException e){
+        }catch (SQLException | SelectException e){
             throw new InsertException("Erro ao inserir contato");
         }
     }

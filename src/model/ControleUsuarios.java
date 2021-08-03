@@ -1,17 +1,24 @@
-package dados;
+package model;
+
+import exceptions.InsertException;
+import exceptions.SelectException;
+import database.UserDAO;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import exceptions.InsertException;
-import exceptions.SelectException;
-import persistencia.UserDAO;
-
 public class ControleUsuarios {
-    private final UserDAO userDAO;
+    private static  UserDAO userDAO;
+    private static ControleUsuarios instance = null;
 
-    public ControleUsuarios() throws SQLException, SelectException, ClassNotFoundException {
-        userDAO = UserDAO.getInstace();
+    private ControleUsuarios(){}
+
+    public static ControleUsuarios getInstance() throws SQLException, SelectException, ClassNotFoundException {
+        if(instance==null){
+            userDAO = UserDAO.getInstace();
+            instance = new ControleUsuarios();
+        }
+        return instance;
     }
 
     public boolean cadastro (User user) throws SelectException, InsertException {
