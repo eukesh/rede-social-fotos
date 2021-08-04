@@ -4,7 +4,7 @@ import exceptions.DeleteException;
 import exceptions.InsertException;
 import exceptions.SelectException;
 import exceptions.UpdateException;
-import model.Publicacao;
+import model.Post;
 import model.User;
 
 import java.sql.Connection;
@@ -39,13 +39,13 @@ public class PostDAO {
 
     private PostDAO() throws ClassNotFoundException, SQLException {
         Connection conexao = Conexao.getConexao();
-        selectNewId = conexao.prepareStatement("select nextval('id_publicacao')");
-        insert = conexao.prepareStatement("insert into publicacao values(?,?,?,?)");
-        select = conexao.prepareStatement("select * from publicacao where id = ?");
-        selectUser = conexao.prepareStatement("select * from publicacao where id_user =?");
-        update = conexao.prepareStatement("update publicacao set texto = ? where id = ?");
-        delete = conexao.prepareStatement("delete from publicacao where id=?");
-        selectAll = conexao.prepareStatement("select * from publicacao");
+        selectNewId = conexao.prepareStatement("select nextval('id_post')");
+        insert = conexao.prepareStatement("insert into post values(?,?,?,?)");
+        select = conexao.prepareStatement("select * from post where id = ?");
+        selectUser = conexao.prepareStatement("select * from post where id_user =?");
+        update = conexao.prepareStatement("update post set texto = ? where id = ?");
+        delete = conexao.prepareStatement("delete from post where id=?");
+        selectAll = conexao.prepareStatement("select * from post");
     }
 
     private int selectNewId() throws SelectException {
@@ -60,7 +60,7 @@ public class PostDAO {
         return 0;
     }
 
-    public void insert(Publicacao post) throws InsertException {
+    public void insert(Post post) throws InsertException {
         try{
             insert.setInt(1,selectNewId());
             insert.setString(2,post.getTexto());
@@ -73,8 +73,8 @@ public class PostDAO {
         }
     }
 
-    public List<Publicacao> select(User user) throws SelectException{
-        List<Publicacao> temp = new ArrayList<>();
+    public List<Post> select(User user) throws SelectException{
+        List<Post> temp = new ArrayList<>();
         try{
             selectUser.setInt(1,user.getId());
             ResultSet rs = selectUser.executeQuery();
@@ -83,7 +83,7 @@ public class PostDAO {
                 String texto = rs.getString(2);
                 byte[] img = rs.getBytes(4);
 
-                temp.add(new Publicacao(id,texto,user,curtidasDAO.selectPost(id),img));
+                temp.add(new Post(id,texto,user,curtidasDAO.selectPost(id),img));
             }
             return temp;
         }catch (SQLException e) {
@@ -91,7 +91,7 @@ public class PostDAO {
         }
     }
 
-    public void update(Publicacao post ) throws UpdateException {
+    public void update(Post post ) throws UpdateException {
         try{
             update.setString(1,post.getTexto());
             update.setInt(2,post.getId());
@@ -102,7 +102,7 @@ public class PostDAO {
         }
     }
 
-    public void delete(Publicacao post) throws DeleteException {
+    public void delete(Post post) throws DeleteException {
         try {
             curtidasDAO.delete(post);
             delete.setInt(1,post.getId());
@@ -112,8 +112,8 @@ public class PostDAO {
         }
     }
 
-    public List<Publicacao> getAll() throws SelectException {
-        List<Publicacao> temp = new ArrayList<>();
+    public List<Post> getAll() throws SelectException {
+        List<Post> temp = new ArrayList<>();
         try{
             ResultSet rs = selectAll.executeQuery();
 
@@ -123,7 +123,7 @@ public class PostDAO {
                 int idUser = rs.getInt(3);
                 byte[] img = rs.getBytes(4);
 
-                temp.add(new Publicacao(id,texto,userDAO.select(idUser),curtidasDAO.selectPost(id),img));
+                temp.add(new Post(id,texto,userDAO.select(idUser),curtidasDAO.selectPost(id),img));
             }
 
             return temp;

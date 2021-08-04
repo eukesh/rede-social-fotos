@@ -3,22 +3,22 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Publicacao {
+public class Post {
     private int id;
     private User user;
     private byte[] imagem;
     private String texto;
     private List<User> curtidas = new ArrayList<User>();
 
-    public Publicacao(){}
+    public Post(){}
 
-    public Publicacao(int id,String texto,User user){
+    public Post(int id, String texto, User user){
         this.id = id;
         this.texto = texto;
         this.user = user;
     }
 
-    public Publicacao(int id,String texto,User user,List<User> curtidas, byte[] img){
+    public Post(int id, String texto, User user, List<User> curtidas, byte[] img){
         this.id = id;
         this.texto = texto;
         this.user = user;
@@ -69,8 +69,8 @@ public class Publicacao {
     @Override
     public boolean equals(Object o) {
 
-        if (o instanceof Publicacao) {
-            Publicacao c = (Publicacao) o;
+        if (o instanceof Post) {
+            Post c = (Post) o;
             if(this.id == c.getId()){
                 return true;
             }else{

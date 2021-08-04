@@ -1,7 +1,7 @@
 package controller;
 import model.ControleUsuarios;
 import model.User;
-import model.Publicacao;
+import model.Post;
 import exceptions.DeleteException;
 import exceptions.InsertException;
 import exceptions.SelectException;
@@ -65,25 +65,25 @@ public class Sistema {
         userLogin = controleUsuarios.autenticaLogin(userLogin);
     }
 
-    public void addPost(Publicacao post) throws InsertException, SelectException {
+    public void addPost(Post post) throws InsertException, SelectException {
 
         post.setUser(userLogin);
         postDao.insert(post);
     }
 
 
-    public void removePost(Publicacao post) throws DeleteException, SelectException {
+    public void removePost(Post post) throws DeleteException, SelectException {
         postDao.delete(post);
         userLogin = controleUsuarios.autenticaLogin(userLogin);
     }
 
-    public List<Publicacao> getPostagemUser() throws SelectException {
+    public List<Post> getPostagemUser() throws SelectException {
         return postDao.select(userLogin);
     }
 
-    public List<Publicacao> getPostagemFeed() throws SelectException, InsertException {
-        List<Publicacao> temp = new ArrayList<>();
-        for (Publicacao x : postDao.getAll()){
+    public List<Post> getPostagemFeed() throws SelectException, InsertException {
+        List<Post> temp = new ArrayList<>();
+        for (Post x : postDao.getAll()){
             for(User y : userLogin.getSeguindo()){
                 if(x.getUser().equals(y)){
                     // implementacao da curtida apenas para teste
@@ -95,7 +95,7 @@ public class Sistema {
         return temp;
     }
 
-    public void likePublicacao(Publicacao x) throws InsertException, SelectException {
+    public void likePublicacao(Post x) throws InsertException, SelectException {
         if(x.setLikes(userLogin))
             curtidasDAO.insert(x,userLogin);
     }

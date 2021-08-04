@@ -1,6 +1,6 @@
 package database;
 
-import model.Publicacao;
+import model.Post;
 import model.User;
 import exceptions.DeleteException;
 import exceptions.InsertException;
@@ -35,8 +35,8 @@ public class CurtidasDAO {
         Connection conexao = Conexao.getConexao();
         selectNewId = conexao.prepareStatement("select nextval('id_curtidas')");
         insert = conexao.prepareStatement("insert into curtidas values(?,?,?)");
-        select = conexao.prepareStatement("select * from curtidas where id_publicacao=?");
-        delete = conexao.prepareStatement("delete from curtidas where id_publicacao=?");
+        select = conexao.prepareStatement("select * from curtidas where id_post=?");
+        delete = conexao.prepareStatement("delete from curtidas where id_post=?");
     }
 
     private int selectNewId() throws SelectException {
@@ -51,7 +51,7 @@ public class CurtidasDAO {
         return 0;
     }
 
-    public void insert(Publicacao post, User user) throws InsertException{
+    public void insert(Post post, User user) throws InsertException{
         try{
             insert.setInt(1,selectNewId());
             insert.setInt(2,post.getId());
@@ -83,7 +83,7 @@ public class CurtidasDAO {
     }
 
 
-    public void delete(Publicacao post) throws DeleteException {
+    public void delete(Post post) throws DeleteException {
         try {
             delete.setInt(1,post.getId());
             delete.executeUpdate();

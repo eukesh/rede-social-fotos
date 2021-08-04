@@ -4,7 +4,7 @@ import exceptions.DeleteException;
 import exceptions.InsertException;
 import exceptions.SelectException;
 import model.ImageMethods;
-import model.Publicacao;
+import model.Post;
 import model.User;
 
 import java.sql.SQLException;
@@ -74,7 +74,7 @@ public class Tests {
     }
 
     public static void postarFoto() throws Exception {
-        Publicacao p = new Publicacao();
+        Post p = new Post();
         s.nextLine();
         System.out.println("Digite o texto");
         p.setTexto(s.nextLine());
@@ -83,14 +83,14 @@ public class Tests {
     }
 
     public static void mostrarFotos() throws Exception {      
-        for(Publicacao x : sistema.getPostagemUser()) {
+        for(Post x : sistema.getPostagemUser()) {
             System.out.println(x);
             ImageMethods.saveByteToImage(x.getImagem());
         }
     }
 
     public static void mostrarFeed() throws SelectException, InsertException {
-        for(Publicacao x : sistema.getPostagemFeed()){
+        for(Post x : sistema.getPostagemFeed()){
             System.out.println(x);
 
         }
@@ -98,7 +98,7 @@ public class Tests {
     }
 
     public static void removerPost() throws SelectException, DeleteException {
-        List<Publicacao> temp = sistema.getPostagemUser();
+        List<Post> temp = sistema.getPostagemUser();
 
         for (int i = 0; i <temp.size(); i++) {
             System.out.println(i);

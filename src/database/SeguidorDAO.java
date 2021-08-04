@@ -36,7 +36,7 @@ public class SeguidorDAO {
         selectNewId = conexao.prepareStatement("select nextval('id_seguidores')");
         insert = conexao.prepareStatement("insert into seguidores values(?,?,?)");
         select1 = conexao.prepareStatement("select * from seguidores where id_seguidor =?");
-        select2 = conexao.prepareStatement("select * from seguidores where id_seguido =?");
+        select2 = conexao.prepareStatement("select * from seguidores where id_seguindo =?");
         delete = conexao.prepareStatement("delete from seguidores where id_seguidor=? and id_seguido=?");
     }
 
