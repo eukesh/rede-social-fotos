@@ -20,7 +20,7 @@ public class Tests {
 
     static {
         try {
-            sistema = new Sistema("toor");
+            sistema = Sistema.getInstance();
         } catch (ClassNotFoundException | SQLException | SelectException e) {
             e.printStackTrace();
         }

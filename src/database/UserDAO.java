@@ -66,6 +66,7 @@ public class UserDAO {
             insert.setString(6,usuario.getSenha());
             insert.setString(7,usuario.getNickName());
             insert.executeUpdate();
+            System.out.println(insert);
 
         }catch (SQLException | SelectException e){
             throw new InsertException("Erro ao inserir contato");

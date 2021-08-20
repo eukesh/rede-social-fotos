@@ -1,0 +1,16 @@
+
+k
+java:S1206r"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ
+t
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(ª¨“Èúÿÿÿÿ
+t
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(á§Ğøÿÿÿÿ
+F
+java:S1172"+Remove this unused method parameter "nome".(¦»¾Üøÿÿÿÿ
+U
+java:S6201t"?Replace this instanceof check and cast with 'instanceof User c'(µÿû‡
+J
+java:S1656!"/Remove or correct this useless self-assignment.(É´“ıÿÿÿÿ
+[	java:S107"AConstructor has 9 parameters, which is greater than 7 authorized.(à€âàúÿÿÿÿ
+}
+java:S4165!"bRemove this useless assignment; "name" already holds the assigned value along all execution paths.(É´“ıÿÿÿÿ

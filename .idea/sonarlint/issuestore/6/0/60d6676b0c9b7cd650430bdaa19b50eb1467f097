@@ -1,0 +1,9 @@
+
+k
+java:S1206F"PThis class overrides "equals()" and should therefore also override "hashCode()".(İ¢êÍıÿÿÿÿ
+o
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Š¹âÓ
+U
+java:S6201H"?Replace this instanceof check and cast with 'instanceof Post c'(áÜÉç
+\
+java:S1126J"AReplace this if-then-else statement by a single return statement.(Š–îÜşÿÿÿÿ

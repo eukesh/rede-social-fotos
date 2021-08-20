@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -26,15 +26,16 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="64ee40f8-17f6-4620-959f-060482ca22fe">
-        <schema name="information_schema" object-types="table, view, sequence, function" />
         <schema name="pg_catalog" object-types="table, view, function" />
-        <schema name="public" object-types="table, view, sequence, function, index" />
+        <schema name="public" object-types="table, view, function" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="64ee40f8-17f6-4620-959f-060482ca22fe">
-      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from usuario]]></console>
+      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from usuario
+select * from seguidores
+select * from post]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

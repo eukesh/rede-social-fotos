@@ -16,18 +16,25 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Sistema {
-    private final ControleUsuarios controleUsuarios;
-    private User userLogin;
-    private final PostDAO postDao;
-    private final SeguidorDAO seguidorDAO;
-    private final CurtidasDAO curtidasDAO;
+    private static ControleUsuarios controleUsuarios;
+    private static User userLogin;
+    private static PostDAO postDao;
+    private static SeguidorDAO seguidorDAO;
+    private static CurtidasDAO curtidasDAO;
+    private static Sistema instance = null;
 
-    public Sistema(String senha) throws ClassNotFoundException, SQLException, SelectException {
-        Conexao.setSenha(senha);
-        controleUsuarios = ControleUsuarios.getInstance();
-        postDao = PostDAO.getInstace();
-        seguidorDAO = SeguidorDAO.getInstace();
-        curtidasDAO = CurtidasDAO.getInstace();
+    private Sistema(){}
+
+    public static Sistema getInstance() throws SQLException, SelectException, ClassNotFoundException {
+        if(instance == null) {
+            instance = new Sistema();
+            Conexao.setSenha("toor");
+            controleUsuarios = ControleUsuarios.getInstance();
+            postDao = PostDAO.getInstace();
+            seguidorDAO = SeguidorDAO.getInstace();
+            curtidasDAO = CurtidasDAO.getInstace();
+        }
+        return instance;
     }
 
     public boolean cadastrarUsuarios(User user) throws InsertException, SelectException {
@@ -70,7 +77,6 @@ public class Sistema {
         post.setUser(userLogin);
         postDao.insert(post);
     }
-
 
     public void removePost(Post post) throws DeleteException, SelectException {
         postDao.delete(post);
