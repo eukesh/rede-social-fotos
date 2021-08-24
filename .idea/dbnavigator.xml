@@ -36,8 +36,12 @@
       <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from usuario
 select * from seguidores
 select * from post
+select * from curtidas
 
-delete from post where id >11]]></console>
+
+delete from post where id >0
+delete from seguidores where id>0
+delete from usuario where id>0 cascade]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

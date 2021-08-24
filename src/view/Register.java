@@ -42,12 +42,12 @@ public class Register extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String nome = nomeField.getText();
                 String user = userField.getText();
-                String email = Register.this.emailField.getText();
+                String email = emailField.getText();
                 String sexo = comboBox1.getSelectedItem().toString();
                 System.out.println(sexo);
-                String telefone = Register.this.telefoneField.getText();
-                String senha = Register.this.senhaField.getText();
-                String reSenha = Register.this.reSenhaField.getText();
+                String telefone = telefoneField.getText();
+                String senha = senhaField.getText();
+                String reSenha = reSenhaField.getText();
 
                 if(!senha.equals(reSenha)){
                     JOptionPane.showMessageDialog(null,"As senhas não correspondem");
