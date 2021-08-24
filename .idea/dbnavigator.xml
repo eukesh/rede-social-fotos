@@ -27,7 +27,7 @@
     <loaded-nodes>
       <connection connection-id="64ee40f8-17f6-4620-959f-060482ca22fe">
         <schema name="pg_catalog" object-types="table, view, function" />
-        <schema name="public" object-types="table, view, function" />
+        <schema name="public" object-types="table, view, function, column" />
       </connection>
     </loaded-nodes>
   </component>
@@ -35,7 +35,9 @@
     <connection id="64ee40f8-17f6-4620-959f-060482ca22fe">
       <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select * from usuario
 select * from seguidores
-select * from post]]></console>
+select * from post
+
+delete from post where id >11]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

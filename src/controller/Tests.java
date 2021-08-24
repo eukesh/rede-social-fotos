@@ -78,7 +78,7 @@ public class Tests {
         s.nextLine();
         System.out.println("Digite o texto");
         p.setTexto(s.nextLine());
-        p.setImagem(ImageMethods.imageToByte("C:\\Users\\User\\Documents\\Code\\POO\\rede-social-fotos\\.temp\\UML.png"));
+        p.setImagem(ImageMethods.imageToByte("C:\\Users\\User\\Desktop\\Horarios.jpeg"));
         sistema.addPost(p);
     }
 

@@ -58,7 +58,7 @@ public class Register extends JFrame {
                         Login loginPage = null;
                         try {
                             loginPage = new Login();
-                        } catch (SQLException | SelectException | ClassNotFoundException ex) {
+                        } catch (SQLException | SelectException | ClassNotFoundException | UnsupportedLookAndFeelException | InstantiationException | IllegalAccessException ex) {
                             JOptionPane.showMessageDialog(null,"Erro ao abrir Janela");
                         }
                         loginPage.show();
@@ -80,7 +80,7 @@ public class Register extends JFrame {
                 Login loginPage = null;
                 try {
                     loginPage = new Login();
-                } catch (SQLException | SelectException | ClassNotFoundException ex) {
+                } catch (SQLException | SelectException | ClassNotFoundException | UnsupportedLookAndFeelException | InstantiationException | IllegalAccessException ex) {
                     JOptionPane.showMessageDialog(null,"Erro ao abrir Janela");
                 }
                 loginPage.show();

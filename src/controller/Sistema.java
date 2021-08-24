@@ -85,6 +85,7 @@ public class Sistema {
 
     public List<Post> getPostagemUser() throws SelectException {
         return postDao.select(userLogin);
+
     }
 
     public List<Post> getPostagemFeed() throws SelectException, InsertException {
@@ -92,8 +93,6 @@ public class Sistema {
         for (Post x : postDao.getAll()){
             for(User y : userLogin.getSeguindo()){
                 if(x.getUser().equals(y)){
-                    // implementacao da curtida apenas para teste
-                    likePublicacao(x);
                     temp.add(x);
                 }
             }

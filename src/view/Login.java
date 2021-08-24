@@ -19,7 +19,7 @@ public class Login extends JFrame{
     private JButton loginButton;
     private JPasswordField passwordField1;
 
-    public Login() throws SQLException, SelectException, ClassNotFoundException {
+    public Login() throws SQLException, SelectException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
         super("Login");
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,9 +49,9 @@ public class Login extends JFrame{
                 } catch (SelectException ex) {
                     JOptionPane.showMessageDialog(null,"Dados inválidos");
                 }
-                PostList feedPage = null;
+                PainelPrincipal feedPage = null;
                 try {
-                    feedPage = new PostList();
+                    feedPage = new PainelPrincipal();
                 } catch (SQLException | SelectException | ClassNotFoundException | InsertException ex) {
                     JOptionPane.showMessageDialog(null,"Erro ao abrir Janela");
                 }
@@ -72,10 +72,18 @@ public class Login extends JFrame{
                 dispose();
             }
         });
+
     }
 
 
-    public static void main(String[] args) throws SQLException, SelectException, ClassNotFoundException {
-        JFrame frame = new Login();
+    public static void main(String[] args) throws SQLException, SelectException, ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException, IllegalAccessException {
+
+        try{
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+        new Login();
     }
 }
